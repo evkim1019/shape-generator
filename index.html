@@ -5,6 +5,13 @@
         font-family: verdana;
         padding: 1rem;
       }
+      h1 p {
+        display:inline-block;
+        padding-left: 20px;
+        font-weight: normal;
+        font-size: 0.6em;
+        color: dodgerblue;
+      }
       form {
         border: solid 1px dodgerBlue;
         padding: 1rem;
@@ -28,7 +35,7 @@
         background-color: tomato;
         width: 75px;
         height: 75px;
-        border-radius: 50%;
+        /* border-radius: 50%; */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -48,7 +55,7 @@
     <title>Shape Generator</title>
   </head>
   <body>
-    <h1><a href='index.html'>Shape Generator</a></h1>
+    <h1><a href='index.html'>Shape Generator</a><p id="currentStat"></p></h1>
     <h2>Todos</h2>
     <ul>
       <li>Create a repo named shape-generator and add this index.html page</li>
@@ -77,10 +84,11 @@
       const input = form.querySelector('input');
       const link = document.querySelector('a');
       const container = document.querySelector('#container');
+      let numCollection = [];
 
       container.addEventListener('click', (ev)=>{
         if(!ev.target.id){
-          ev.target.parentNode.removeChild(ev.target);
+          ev.target.parentNode.remove(ev.target);
         }
       });
 
@@ -89,23 +97,29 @@
         const circle = document.createElement('div');
         circle.style.width = size;
         circle.style.height = size;
+        circle.style.borderRadius = Math.round(1 * Math.random()) === 0 ? '0' : '50%';
         container.appendChild(circle);
         const span = document.createElement('span');
         span.innerText = input.value;
         circle.appendChild(span);
-        input.value = 25 + Math.floor(Math.random()*50);
+        input.value = 25 + Math.floor(Math.random()* 225);
         window.setTimeout(function(){
           circle.classList.add('blue');
         }, 500);
+
+        const currentStat = document.querySelector('#currentStat');
+        numCollection.push(Number(size.slice(0, size.length - 2)));
+        const totalNum = numCollection.reduce((a, b) => a + b);
+        console.log(numCollection, totalNum);
+        currentStat.innerText = `Latest size: ${size.slice(0, size.length - 2)},  Next: ${input.value},  Average: ${Math.round(totalNum / numCollection.length)}`;
       };
+      
 
       form.addEventListener('submit', (ev)=> {
         ev.preventDefault();
         generateCircle();
       });
 
-      generateCircle();
-      generateCircle();
       generateCircle();
 
     </script>
