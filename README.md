@@ -1,3 +1,3 @@
 # shape-generator
 
-Click <a href='https://github.com/evkim1019/shape-generator.git' target='_blank'>Demo</a> to get started.
+Click <a href='https://fullstackacademy.github.io/shape-generator/' target='_blank'>Demo</a> to get started.
